@@ -20,15 +20,21 @@ class Classifier(metaclass=abc.ABCMeta):
     def __getattr__(self, name):
         print("{} don't exist in {} classifier".format(name, self.cls_type))
 
-    @abc.abstractmethod
-    def fit():
-        """Méthode d'entrainement de l'algorithme."""
-
-    @abc.abstractmethod
-    def predict():
-        """Fonction de prédiction pour une nouvelle entrée x."""
+    @staticmethod
+    def load():
+        data = pd.read_csv('data.csv', delimiter=',')
+        display(data.loc[:, ['median_income', 'total_rooms']])
+        display(data.loc[:, ['median_house_value']])
+        
+    # @abc.abstractmethod
+    # def fit():
+    #     """Méthode d'entrainement de l'algorithme."""
+    #
+    # @abc.abstractmethod
+    # def predict():
+    #     """Fonction de prédiction pour une nouvelle entrée x."""
 
 
 if __name__ == "__main__":
     # execute only if run as a script
-    Classifier()
+    Classifier.load()
